@@ -1,7 +1,7 @@
 export interface DropDownItem {
   id: number;
-  value: String;
-  shortHand: String;
+  value: string;
+  shortHand: string;
 }
 
 export type DropDownItemList = DropDownItem[];

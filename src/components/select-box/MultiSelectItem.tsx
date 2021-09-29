@@ -1,7 +1,11 @@
 import React from "react";
 
-const MultiSelectItem = () => {
-  return <div>multi select</div>;
+interface ItemProps {
+  value: string;
+}
+
+const MultiSelectItem = ({ value }: ItemProps) => {
+  return <div>{value}</div>;
 };
 
 export default MultiSelectItem;

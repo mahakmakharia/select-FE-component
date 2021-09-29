@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import MultiSelectItem from "./MultiSelectItem";
 import SingleSelectItem from "./SingleSelectItem";
-import { DropDownItemList } from "../../interfaces/DropDownItem";
+import { DropDownItem, DropDownItemList } from "../../interfaces/DropDownItem";
 
 interface SelectBoxProps {
   multiSelect: boolean;
@@ -11,7 +11,7 @@ interface SelectBoxProps {
 const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
   const [open, setOpen] = useState(false);
   // const [clickedOutside, setClickedOutside] = useState(false);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState<DropDownItemList>([]);
 
   const myRef = useRef<HTMLInputElement>(null);
 
@@ -25,6 +25,22 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   });
 
+  const handleOnClick = (item: DropDownItem) => {
+    if (!multiSelect) setSelected([item]);
+    else {
+      if (!selected.some((current) => current.id === item.id)) {
+        setSelected([...selected, item]);
+      } else {
+        let selectionAfterRemoval: DropDownItemList = selected;
+        selectionAfterRemoval = selectionAfterRemoval.filter(
+          (current) => current.id !== item.id
+        );
+
+        setSelected([...selectionAfterRemoval]);
+      }
+    }
+  };
+
   return (
     <>
       <div
@@ -34,20 +50,35 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
         className='inputField'
       >
         <input
-          ref={myRef}
-          value={selected}
+          value={selected.length > 0 ? selected[0].value : undefined}
           placeholder='Select your class'
         ></input>
         <div className='icon'></div>
       </div>
       {open ? (
         multiSelect ? (
-          <div className='multiSelect'>
-            <MultiSelectItem />
+          <div ref={myRef} className='multiSelect'>
+            {items.map((item) => (
+              <div
+                key={item.id}
+                role='button'
+                onClick={() => handleOnClick(item)}
+              >
+                <MultiSelectItem value={item.value} />
+              </div>
+            ))}
           </div>
         ) : (
-          <div className='singleSelect'>
-            <SingleSelectItem />
+          <div ref={myRef} className='singleSelect'>
+            {items.map((item) => (
+              <div
+                key={item.id}
+                role='button'
+                onClick={() => handleOnClick(item)}
+              >
+                <SingleSelectItem value={item.value} />
+              </div>
+            ))}
           </div>
         )
       ) : null}

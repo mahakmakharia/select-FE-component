@@ -1,7 +1,11 @@
 import React from "react";
 
-const SingleSelectItem = () => {
-  return <div>single select</div>;
+interface ItemProps {
+  value: string;
+}
+
+const SingleSelectItem = ({ value }: ItemProps) => {
+  return <div>{value}</div>;
 };
 
 export default SingleSelectItem;
