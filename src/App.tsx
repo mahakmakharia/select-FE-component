@@ -1,7 +1,12 @@
 import React from "react";
+import SelectBox from "./components/select-box/SelectBox";
 
 function App() {
-  return <div className='App'>works</div>;
+  return (
+    <>
+      <SelectBox />
+    </>
+  );
 }
 
 export default App;
