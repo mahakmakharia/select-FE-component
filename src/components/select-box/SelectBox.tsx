@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import MultiSelectItem from "./MultiSelectItem";
 import SingleSelectItem from "./SingleSelectItem";
 import { DropDownItem, DropDownItemList } from "../../interfaces/DropDownItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 interface SelectBoxProps {
   multiSelect: boolean;
@@ -43,18 +45,35 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
 
   return (
     <>
-      <div
-        role='button'
-        onKeyPress={() => toggleState()}
-        onClick={() => toggleState()}
-        className='inputField'
-      >
-        <input
-          value={selected.length > 0 ? selected[0].value : undefined}
-          placeholder='Select your class'
-        ></input>
-        <div className='icon'></div>
-      </div>
+      {!multiSelect ? (
+        <div
+          role='button'
+          onKeyPress={() => toggleState()}
+          onClick={() => toggleState()}
+          className='inputField'
+        >
+          <input
+            value={selected.length > 0 ? selected[0].value : undefined}
+            placeholder='Select your class'
+          ></input>
+          <div className='icon'>
+            <FontAwesomeIcon icon={faChevronDown} />
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
+        </div>
+      ) : (
+        <div
+          role='button'
+          onKeyPress={() => toggleState()}
+          onClick={() => toggleState()}
+          className='inputField'
+        >
+          <div>Select you standard</div>
+          {selected?.map((item) => item.value)}
+          <div className='icon'></div>
+        </div>
+      )}
+
       {open ? (
         multiSelect ? (
           <div ref={myRef} className='multiSelect'>
