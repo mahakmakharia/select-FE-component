@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import MultiSelectItem from "./MultiSelectItem";
 import SingleSelectItem from "./SingleSelectItem";
 import { DropDownItem, DropDownItemList } from "../../interfaces/DropDownItem";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
+import SingleInputBox from "./input-box/SingleInputBox";
+import MultiSelectInputBox from "./input-box/MultiSelectInputBox";
 
 interface SelectBoxProps {
   multiSelect: boolean;
@@ -21,6 +21,7 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
   const handleClickOutside = (e: any) => {
     if (myRef && !myRef?.current?.contains(e.target)) setOpen(false);
   };
+  const clearSelected = () => setSelected([]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -28,8 +29,12 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
   });
 
   const handleOnClick = (item: DropDownItem) => {
-    if (!multiSelect) setSelected([item]);
-    else {
+    if (!multiSelect) {
+      let selection: DropDownItemList = [];
+      selection.push(item);
+      setSelected([...selection]);
+      console.log(selected);
+    } else {
       if (!selected.some((current) => current.id === item.id)) {
         setSelected([...selected, item]);
       } else {
@@ -39,6 +44,7 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
         );
 
         setSelected([...selectionAfterRemoval]);
+        console.log(selected);
       }
     }
   };
@@ -46,32 +52,17 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
   return (
     <>
       {!multiSelect ? (
-        <div
-          role='button'
-          onKeyPress={() => toggleState()}
-          onClick={() => toggleState()}
-          className='inputField'
-        >
-          <input
-            value={selected.length > 0 ? selected[0].value : undefined}
-            placeholder='Select your class'
-          ></input>
-          <div className='icon'>
-            <FontAwesomeIcon icon={faChevronDown} />
-            <FontAwesomeIcon icon={faTimes} />
-          </div>
-        </div>
+        <SingleInputBox
+          toggleState={toggleState}
+          selected={selected}
+          clearSelected={clearSelected}
+        />
       ) : (
-        <div
-          role='button'
-          onKeyPress={() => toggleState()}
-          onClick={() => toggleState()}
-          className='inputField'
-        >
-          <div>Select you standard</div>
-          {selected?.map((item) => item.value)}
-          <div className='icon'></div>
-        </div>
+        <MultiSelectInputBox
+          toggleState={toggleState}
+          selected={selected}
+          clearSelected={clearSelected}
+        />
       )}
 
       {open ? (

@@ -1,0 +1,23 @@
+input,
+input:focus {
+  outline: none;
+  border: none;
+}
+
+.inputField {
+  display: flex;
+  width: 280px;
+  height: 30px;
+  border: 1px solid #2d333a;
+  border-radius: 4px;
+  padding: 6px 15px;
+}
+
+.customInput {
+  flex-grow: 1;
+  align-self: center;
+}
+
+.icon {
+  align-self: center;
+}
