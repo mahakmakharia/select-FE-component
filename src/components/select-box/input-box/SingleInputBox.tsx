@@ -21,28 +21,29 @@ const SingleInputBox = ({
         role='button'
         onKeyPress={() => toggleState()}
         onClick={() => toggleState()}
-        className='inputField'
+        className='customInput'
       >
         <input
           value={selected}
+          type='text'
           placeholder='Select your class'
-          className='customInput'
+          className='inputField'
         ></input>
 
         {selected ? (
           <div
-            className='icon'
+            className='icon-box'
             role='button'
             onClick={() => {
               clearSelected();
               toggleState();
             }}
           >
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon className='icon' icon={faTimes} />
           </div>
         ) : (
-          <div className='icon' role='button'>
-            <FontAwesomeIcon icon={faChevronDown} />
+          <div className='icon-box' role='button'>
+            <FontAwesomeIcon className='icon' icon={faChevronDown} />
           </div>
         )}
       </div>

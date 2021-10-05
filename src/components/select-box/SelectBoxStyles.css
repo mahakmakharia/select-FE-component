@@ -4,20 +4,61 @@ input:focus {
   border: none;
 }
 
-.inputField {
+.customInput {
   display: flex;
   width: 280px;
   height: 30px;
   border: 1px solid #2d333a;
   border-radius: 4px;
   padding: 6px 15px;
+  background-color: #16191d;
 }
 
-.customInput {
+.inputField {
   flex-grow: 1;
   align-self: center;
+  color: #fff;
+  background-color: #16191d;
+}
+
+.icon-box {
+  align-self: center;
+  padding: 5px;
+  display: block;
+  background-color: #16191d;
 }
 
 .icon {
-  align-self: center;
+  background-color: #16191d;
+}
+
+.icon-box:hover {
+  cursor: pointer;
+}
+
+.placeholder {
+  background-color: #16191d;
+  color: #797979;
+}
+
+.singleSelect,
+.multiSelect {
+  background-color: #1a2128;
+  height: auto;
+  width: 310px;
+  color: #fff;
+  margin-top: 10px;
+  border-radius: 4px;
+  padding: 10px 0px;
+}
+
+.singleItem {
+  padding: 5px 10px;
+  background-color: #1a2128;
+}
+
+.singleItem:hover,
+.singleItem:active {
+  background-color: #6074de;
+  cursor: pointer;
 }

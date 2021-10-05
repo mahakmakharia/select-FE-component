@@ -5,7 +5,7 @@ interface ItemProps {
 }
 
 const SingleSelectItem = ({ value }: ItemProps) => {
-  return <div>{value}</div>;
+  return <div className='singleItem'>{value}</div>;
 };
 
 export default SingleSelectItem;

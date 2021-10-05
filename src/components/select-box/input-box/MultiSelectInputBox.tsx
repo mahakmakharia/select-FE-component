@@ -29,11 +29,11 @@ const MultiSelectInputBox = ({
         role='button'
         onKeyPress={() => toggleState()}
         onClick={() => toggleState()}
-        className='inputField'
+        className='customInput'
       >
-        <div className='customInput'>
+        <div className='inputField'>
           {selectedList.length === 0 ? (
-            <div>Select your standard</div>
+            <div className='placeholder'>Select your standard</div>
           ) : (
             <MultiSelectItems
               deleteItems={deleteItems}
@@ -43,8 +43,8 @@ const MultiSelectInputBox = ({
         </div>
 
         {selectedList.length === 0 ? (
-          <div className='icon' role='button'>
-            <FontAwesomeIcon icon={faChevronDown} />
+          <div className='icon-box' role='button'>
+            <FontAwesomeIcon className='icon' icon={faChevronDown} />
           </div>
         ) : null}
       </div>

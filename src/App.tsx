@@ -1,6 +1,7 @@
 import React from "react";
 import SelectBox from "./components/select-box/SelectBox";
 import { DropDownItemList } from "./interfaces/DropDownItem";
+import "./App.css";
 
 function App() {
   const items: DropDownItemList = [
@@ -22,10 +23,10 @@ function App() {
   ];
 
   return (
-    <>
+    <div className='app'>
       <SelectBox multiSelect={false} items={items} />
       <SelectBox multiSelect={true} items={items} />
-    </>
+    </div>
   );
 }
 
