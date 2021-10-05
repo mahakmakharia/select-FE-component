@@ -45,52 +45,55 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
 
   const handleOnClickSingle = (item: string) => {
     setSelected(item);
+    toggleState();
     console.log(selected);
   };
 
   return (
     <>
       {!multiSelect ? (
-        <SingleInputBox
-          toggleState={toggleState}
-          selected={selected}
-          clearSelected={clearSelected}
-        />
+        <>
+          <SingleInputBox
+            toggleState={toggleState}
+            selected={selected}
+            clearSelected={clearSelected}
+          />
+          {open && (
+            <div ref={myRef} className='singleSelect'>
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  role='button'
+                  onClick={() => handleOnClickSingle(item.value)}
+                >
+                  <SingleSelectItem value={item.value} />
+                </div>
+              ))}
+            </div>
+          )}
+        </>
       ) : (
-        <MultiSelectInputBox
-          toggleState={toggleState}
-          selectedList={selectedList}
-          setSelectedList={setSelectedList}
-        />
+        <>
+          <MultiSelectInputBox
+            toggleState={toggleState}
+            selectedList={selectedList}
+            setSelectedList={setSelectedList}
+          />
+          {open && (
+            <div ref={myRef} className='multiSelect'>
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  role='button'
+                  onClick={() => handleOnClick(item)}
+                >
+                  <MultiSelectItem value={item.value} />
+                </div>
+              ))}
+            </div>
+          )}
+        </>
       )}
-
-      {open ? (
-        multiSelect ? (
-          <div ref={myRef} className='multiSelect'>
-            {items.map((item) => (
-              <div
-                key={item.id}
-                role='button'
-                onClick={() => handleOnClick(item)}
-              >
-                <MultiSelectItem value={item.value} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div ref={myRef} className='singleSelect'>
-            {items.map((item) => (
-              <div
-                key={item.id}
-                role='button'
-                onClick={() => handleOnClickSingle(item.value)}
-              >
-                <SingleSelectItem value={item.value} />
-              </div>
-            ))}
-          </div>
-        )
-      ) : null}
     </>
   );
 };
