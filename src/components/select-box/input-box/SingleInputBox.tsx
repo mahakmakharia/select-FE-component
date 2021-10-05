@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,7 +15,6 @@ const SingleInputBox = ({
   selected,
   clearSelected,
 }: InputBoxProps) => {
-  useEffect(() => console.log(selected), [selected]);
   return (
     <>
       <div

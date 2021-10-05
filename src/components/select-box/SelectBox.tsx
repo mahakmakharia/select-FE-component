@@ -12,7 +12,7 @@ interface SelectBoxProps {
 
 const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
   const [open, setOpen] = useState(false);
-  // const [clickedOutside, setClickedOutside] = useState(false);
+
   const [selected, setSelected] = useState("");
   const [selectedList, setSelectedList] = useState<DropDownItemList>([]);
 
@@ -39,14 +39,12 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
       );
 
       setSelectedList([...selectionAfterRemoval]);
-      console.log(selectedList);
     }
   };
 
   const handleOnClickSingle = (item: string) => {
     setSelected(item);
     toggleState();
-    console.log(selected);
   };
 
   return (
