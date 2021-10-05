@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { DropDownItemList } from "../../../interfaces/DropDownItem";
 
 import "../SelectBoxStyles.css";
 
 interface InputBoxProps {
   toggleState: () => void;
-  selected: DropDownItemList;
+  selected: string;
   clearSelected: () => void;
 }
 
@@ -17,6 +16,7 @@ const SingleInputBox = ({
   selected,
   clearSelected,
 }: InputBoxProps) => {
+  useEffect(() => console.log(selected), [selected]);
   return (
     <>
       <div
@@ -26,12 +26,12 @@ const SingleInputBox = ({
         className='inputField'
       >
         <input
-          value={selected[0]?.value}
+          value={selected}
           placeholder='Select your class'
           className='customInput'
         ></input>
 
-        {selected.length > 0 ? (
+        {selected ? (
           <div
             className='icon'
             role='button'
@@ -43,13 +43,7 @@ const SingleInputBox = ({
             <FontAwesomeIcon icon={faTimes} />
           </div>
         ) : (
-          <div
-            className='icon'
-            role='button'
-            onClick={() => {
-              toggleState();
-            }}
-          >
+          <div className='icon' role='button'>
             <FontAwesomeIcon icon={faChevronDown} />
           </div>
         )}

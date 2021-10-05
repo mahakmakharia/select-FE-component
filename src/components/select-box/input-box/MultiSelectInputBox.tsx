@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { DropDownItemList } from "../../../interfaces/DropDownItem";
 
 import "../SelectBoxStyles.css";
+import MultiSelectItems from "./MultiSelectItems";
 
 interface InputBoxProps {
   toggleState: () => void;
-  selected: DropDownItemList;
-  clearSelected: () => void;
+  selectedList: DropDownItemList;
+  setSelectedList: (list: DropDownItemList) => void;
 }
 
 const MultiSelectInputBox = ({
   toggleState,
-  selected,
-  clearSelected,
+  selectedList,
+  setSelectedList,
 }: InputBoxProps) => {
+  const deleteItems = (id: number) => {
+    let updatedList = selectedList.filter((item) => item.id !== id);
+    setSelectedList([...updatedList]);
+  };
+
   return (
     <>
       <div
@@ -25,30 +31,22 @@ const MultiSelectInputBox = ({
         onClick={() => toggleState()}
         className='inputField'
       >
-        <div className='customInput'>Select your standard</div>
+        <div className='customInput'>
+          {selectedList.length === 0 ? (
+            <div>Select your standard</div>
+          ) : (
+            <MultiSelectItems
+              deleteItems={deleteItems}
+              selectedList={selectedList}
+            />
+          )}
+        </div>
 
-        {selected.length > 0 ? (
-          <div
-            className='icon'
-            role='button'
-            onClick={() => {
-              clearSelected();
-              toggleState();
-            }}
-          >
-            <FontAwesomeIcon icon={faTimes} />
-          </div>
-        ) : (
-          <div
-            className='icon'
-            role='button'
-            onClick={() => {
-              toggleState();
-            }}
-          >
+        {selectedList.length === 0 ? (
+          <div className='icon' role='button'>
             <FontAwesomeIcon icon={faChevronDown} />
           </div>
-        )}
+        ) : null}
       </div>
     </>
   );

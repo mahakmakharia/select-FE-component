@@ -13,40 +13,39 @@ interface SelectBoxProps {
 const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
   const [open, setOpen] = useState(false);
   // const [clickedOutside, setClickedOutside] = useState(false);
-  const [selected, setSelected] = useState<DropDownItemList>([]);
+  const [selected, setSelected] = useState("");
+  const [selectedList, setSelectedList] = useState<DropDownItemList>([]);
 
   const myRef = useRef<HTMLInputElement>(null);
 
-  const toggleState = () => setOpen(!open);
+  const toggleState = () => setOpen((p) => !p);
   const handleClickOutside = (e: any) => {
     if (myRef && !myRef?.current?.contains(e.target)) setOpen(false);
   };
-  const clearSelected = () => setSelected([]);
+  const clearSelected = () => setSelected("");
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  });
+  }, [selected, open]);
 
   const handleOnClick = (item: DropDownItem) => {
-    if (!multiSelect) {
-      let selection: DropDownItemList = [];
-      selection.push(item);
-      setSelected([...selection]);
-      console.log(selected);
+    if (!selectedList.some((current) => current.id === item.id)) {
+      setSelectedList([...selectedList, item]);
     } else {
-      if (!selected.some((current) => current.id === item.id)) {
-        setSelected([...selected, item]);
-      } else {
-        let selectionAfterRemoval: DropDownItemList = selected;
-        selectionAfterRemoval = selectionAfterRemoval.filter(
-          (current) => current.id !== item.id
-        );
+      let selectionAfterRemoval: DropDownItemList = selectedList;
+      selectionAfterRemoval = selectionAfterRemoval.filter(
+        (current) => current.id !== item.id
+      );
 
-        setSelected([...selectionAfterRemoval]);
-        console.log(selected);
-      }
+      setSelectedList([...selectionAfterRemoval]);
+      console.log(selectedList);
     }
+  };
+
+  const handleOnClickSingle = (item: string) => {
+    setSelected(item);
+    console.log(selected);
   };
 
   return (
@@ -60,8 +59,8 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
       ) : (
         <MultiSelectInputBox
           toggleState={toggleState}
-          selected={selected}
-          clearSelected={clearSelected}
+          selectedList={selectedList}
+          setSelectedList={setSelectedList}
         />
       )}
 
@@ -84,7 +83,7 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
               <div
                 key={item.id}
                 role='button'
-                onClick={() => handleOnClick(item)}
+                onClick={() => handleOnClickSingle(item.value)}
               >
                 <SingleSelectItem value={item.value} />
               </div>
