@@ -2,10 +2,10 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { DropDownItemList } from "../../../interfaces/DropDownItem";
+import { DropDownItemList } from "../../../../interfaces/DropDownItem";
 
-import "../SelectBoxStyles.css";
-import MultiSelectItems from "./MultiSelectItems";
+import "../../SelectBoxStyles.css";
+import MultiSelectItems from "./SelectedItems";
 
 interface InputBoxProps {
   toggleState: () => void;

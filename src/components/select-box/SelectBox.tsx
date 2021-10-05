@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import MultiSelectItem from "./MultiSelectItem";
-import SingleSelectItem from "./SingleSelectItem";
+import MultiSelectItem from "./input-box/multi-select/MultiSelectItem";
+import SingleSelectItem from "./input-box/single-select/SingleSelectItem";
 import { DropDownItem, DropDownItemList } from "../../interfaces/DropDownItem";
-import SingleInputBox from "./input-box/SingleInputBox";
-import MultiSelectInputBox from "./input-box/MultiSelectInputBox";
+import SingleInputBox from "./input-box/single-select/SingleInputBox";
+import MultiSelectInputBox from "./input-box/multi-select/MultiSelectInputBox";
 
 interface SelectBoxProps {
   multiSelect: boolean;

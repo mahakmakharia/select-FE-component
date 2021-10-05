@@ -1,17 +1,14 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { DropDownItemList } from "../../../interfaces/DropDownItem";
+import { DropDownItemList } from "../../../../interfaces/DropDownItem";
 
-interface MultiSelectItemsProps {
+interface SelectedItemsProps {
   selectedList: DropDownItemList;
   deleteItems: (id: number) => void;
 }
 
-const MultiSelectItems = ({
-  selectedList,
-  deleteItems,
-}: MultiSelectItemsProps) => {
+const SelectedItems = ({ selectedList, deleteItems }: SelectedItemsProps) => {
   return (
     <div>
       {selectedList.map((current) => {
@@ -29,4 +26,4 @@ const MultiSelectItems = ({
   );
 };
 
-export default MultiSelectItems;
+export default SelectedItems;

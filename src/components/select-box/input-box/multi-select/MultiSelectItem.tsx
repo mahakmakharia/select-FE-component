@@ -1,5 +1,5 @@
 import React from "react";
-import "./SelectBoxStyles.css";
+import "../../SelectBoxStyles.css";
 
 interface ItemProps {
   value: string;

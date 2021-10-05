@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import "../SelectBoxStyles.css";
+import "../../SelectBoxStyles.css";
 
 interface InputBoxProps {
   toggleState: () => void;
