@@ -74,23 +74,28 @@ input:focus {
 .container {
   display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  padding: 10px 35px 10px 45px;
   cursor: pointer;
-  font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  background-color: #1e2126;
+}
+
+.container:hover {
+  background-color: #2d2e33;
 }
 
 .customCheckBox {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
+  top: 12px;
+  left: 20px;
+  height: 14px;
+  width: 14px;
+  border-radius: 4px;
+  background-color: #1e2126;
+  border: 1px solid #383a41;
 }
 
 .container:hover input ~ .customCheckBox {
@@ -110,18 +115,20 @@ input:focus {
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .customCheckBox:after {
+.container input:checked ~ .customCheckBox:after,
+.container:hover input ~ .customCheckBox:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
 .container .customCheckBox:after {
-  left: 9px;
-  top: 5px;
-  width: 10px;
-  height: 20px;
-  border: solid gray;
-  border-width: 0 3px 3px 0;
+  left: 4.5px;
+  top: 1px;
+  width: 3px;
+  height: 6px;
+  border: solid #fff;
+  border-width: 0 2.5px 2.5px 0;
+  border-radius: 2px;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
