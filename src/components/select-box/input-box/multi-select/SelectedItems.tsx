@@ -2,6 +2,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { DropDownItemList } from "../../../../interfaces/DropDownItem";
+import "../../SelectBoxStyles.css";
 
 interface SelectedItemsProps {
   selectedList: DropDownItemList;
@@ -10,19 +11,20 @@ interface SelectedItemsProps {
 
 const SelectedItems = ({ selectedList, deleteItems }: SelectedItemsProps) => {
   return (
-    <div>
+    <>
       {selectedList.map((current) => {
         return (
-          <div>
-            {current.shortHand}
+          <div className='selectedItem'>
+            <div className='selectedText'>{current.shortHand}</div>
             <FontAwesomeIcon
               onClick={() => deleteItems(current.id)}
               icon={faTimes}
+              className='icon'
             />
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 

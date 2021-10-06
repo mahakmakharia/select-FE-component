@@ -35,10 +35,12 @@ const MultiSelectInputBox = ({
           {selectedList.length === 0 ? (
             <div className='placeholder'>Select your standard</div>
           ) : (
-            <MultiSelectItems
-              deleteItems={deleteItems}
-              selectedList={selectedList}
-            />
+            <div className='selectedList'>
+              <MultiSelectItems
+                deleteItems={deleteItems}
+                selectedList={selectedList}
+              />
+            </div>
           )}
         </div>
 

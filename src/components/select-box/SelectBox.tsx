@@ -37,7 +37,7 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
   return (
     <>
       {!multiSelect ? (
-        <>
+        <div className='mainBox'>
           <SingleInputBox
             toggleState={toggleState}
             selected={selected}
@@ -56,9 +56,9 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
               ))}
             </div>
           )}
-        </>
+        </div>
       ) : (
-        <>
+        <div className='mainBox'>
           <MultiSelectInputBox
             toggleState={toggleState}
             selectedList={selectedList}
@@ -78,7 +78,7 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
               ))}
             </div>
           )}
-        </>
+        </div>
       )}
     </>
   );

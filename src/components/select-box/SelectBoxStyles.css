@@ -1,3 +1,7 @@
+.mainBox {
+  margin: 40px 50px;
+}
+
 input,
 input:focus {
   outline: none;
@@ -132,4 +136,31 @@ input:focus {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.selectedList {
+  display: flex;
+  background-color: #16191d;
+}
+
+.selectedItem {
+  display: flex;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  background-color: rgba(196, 196, 196, 20%);
+}
+
+.selectedText {
+  background-color: transparent;
+}
+
+.selectedItem .icon {
+  align-self: center;
+  padding-left: 6px;
+  font-size: 12px;
+  background-color: transparent;
+}
+.selectedItem .icon:hover {
+  cursor: pointer;
 }
