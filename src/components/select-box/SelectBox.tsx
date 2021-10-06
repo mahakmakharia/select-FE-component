@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import MultiSelectItem from "./input-box/multi-select/MultiSelectItem";
 import SingleSelectItem from "./input-box/single-select/SingleSelectItem";
-import { DropDownItem, DropDownItemList } from "../../interfaces/DropDownItem";
+import { DropDownItemList } from "../../interfaces/DropDownItem";
 import SingleInputBox from "./input-box/single-select/SingleInputBox";
 import MultiSelectInputBox from "./input-box/multi-select/MultiSelectInputBox";
 
@@ -28,19 +28,6 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [selected, open]);
-
-  const handleOnClick = (item: DropDownItem) => {
-    if (!selectedList.some((current) => current.id === item.id)) {
-      setSelectedList([...selectedList, item]);
-    } else {
-      let selectionAfterRemoval: DropDownItemList = selectedList;
-      selectionAfterRemoval = selectionAfterRemoval.filter(
-        (current) => current.id !== item.id
-      );
-
-      setSelectedList([...selectionAfterRemoval]);
-    }
-  };
 
   const handleOnClickSingle = (item: string) => {
     setSelected(item);
@@ -80,12 +67,13 @@ const SelectBox = ({ multiSelect = false, items }: SelectBoxProps) => {
           {open && (
             <div ref={myRef} className='multiSelect'>
               {items.map((item) => (
-                <div
-                  key={item.id}
-                  role='button'
-                  onClick={() => handleOnClick(item)}
-                >
-                  <MultiSelectItem value={item.value} />
+                <div key={item.id} role='button'>
+                  <MultiSelectItem
+                    setSelectedList={setSelectedList}
+                    selectedList={selectedList}
+                    item={item}
+                    checked={selectedList.includes(item)}
+                  />
                 </div>
               ))}
             </div>
